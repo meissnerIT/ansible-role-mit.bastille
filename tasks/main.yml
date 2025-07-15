@@ -1,0 +1,19 @@
+---
+- name: Copy templates
+  ansible.builtin.copy:
+    src: templates/meissner.it
+    dest: /usr/local/bastille/templates/
+    mode: "644"
+
+- name: Copy sudoers.d/local-mit-dedicated
+  ansible.builtin.copy:
+    src: roles/mit.basic/files/sudoers.d/local-mit-dedicated
+    dest: /usr/local/bastille/templates/meissner.it/basic/sudoers.d/
+    mode: "0400"
+    directory_mode: "755"
+
+- name: Copy default authorized_keys
+  ansible.builtin.copy:
+    src: "{{ mit_bastille_authorized_keys_file }}"
+    dest: /usr/local/bastille/templates/meissner.it/basic/authorized_keys
+    mode: "644"
